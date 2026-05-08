@@ -27,6 +27,7 @@ class ModelLoaderClass:
 
             if output_classes is not None:
                 self.model.fc = torch.nn.Linear(self.model.fc.in_features, output_classes)
+
         elif "vgg16" in model_type:
             self.weights = models.VGG16_Weights.DEFAULT
             self.model = models.vgg16(weights=weights)
@@ -36,6 +37,7 @@ class ModelLoaderClass:
                     self.model.classifier[6].in_features,
                     output_classes
                 )
+
         elif "mobilenet_v3_small" in model_type:
             # Small + efficient network
             weights = models.MobileNet_V3_Small_Weights.DEFAULT
@@ -46,5 +48,6 @@ class ModelLoaderClass:
                     model.classifier[3].in_features,
                     output_classes
                 )
+                
         else:
             raise ValueError(f"Error! Model Type {model_type} is not supported.")        
