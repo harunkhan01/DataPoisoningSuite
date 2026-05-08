@@ -1,30 +1,18 @@
+import yaml
+from .experiment_runner import ExperimentRunner
 
-from .DataLoading.data_loader_class import DataLoaderClass
-from .FineTuning.fine_tuning_class import FineTuningClass
-from .ModelLoading.model_loader_class import ModelLoaderClass
+def load_config(config_file):
+    with open(config_file, 'r') as file:
+        try:
+            return yaml.safe_load(config_file)
+        except yaml.YAMLError as e:
+            print(f'Error parsing YAML file: {e}')
 
+def main(config_file):
 
-def main(**kwargs):
+    # safe load yaml file
 
-    # stages of execution -- we can set up an argparse to have more programmatic implementation of arguments
-    model_type = kwargs.get('model_type', 'mobilenet_v3_small')
-    output_classes = kwargs.get('output_classes', 10)
-    dataset_name = kwargs.get('dataset', 'mnist')
+    cfg = load_config(config_file)
 
-    # STAGE 1: Load Model (pretrained)
-    model_obj = ModelLoaderClass(model_type, output_classes)
-
-    # STAGE 2: Load Dataset
-    dl_obj = DataLoaderClass(dataset_name, model_obj.preprocess)
-
-    # STAGE 3: Construct Poison
-
-    # STAGE 4: Inject Poison
-
-    # STAGE 5: Finetune model with poisoned dataset
-    ft_obj = FineTuningClass(dl_obj, model_obj)
-    ft_obj.fine_tune()
-
-    # STAGE 6: Evaluate performance
-
-    pass
+    expr = ExperimentRunner(cfg)
+    expr()

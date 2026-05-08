@@ -7,11 +7,11 @@ import torch
 import torchvision.datasets as datasets
 
 class DataLoaderClass:
-    def __init__(self, dataset_name, preprocess, batch_size=64, split=[0.8, 0.2]):
-        self.dataset_name = dataset_name
-        self.batch_size = batch_size
+    def __init__(self, cfg, preprocess):
+        self.dataset_name = cfg.name
+        self.batch_size = cfg.batch_size
+        self.train_val_split = cfg.split
         self.transform = preprocess
-        self.train_val_split = split
 
         self.train_ds = None
         self.test_ds = None

@@ -1,0 +1,17 @@
+dataset:
+  name : "cifar10"
+  batch_size : 64
+
+model: 
+  name : "mobilenet_v3_small"
+  output_classes : 10
+
+training:
+  epochs : 10
+  lr : 1e-5
+  device : 'cuda'
+  verbosity : 10
+
+poison:
+  name : "badnets"
+  ratio: 0.10

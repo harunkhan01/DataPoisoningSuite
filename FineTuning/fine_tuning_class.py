@@ -1,16 +1,13 @@
 import torch
 
 class FineTuningClass:
-    def __init__(self, dl_obj, model_obj, **kwargs):
-        self.epochs = kwargs.get('epochs', 10)
-        self.lr = kwargs.get('lr', 1e-5)
-        self.device = kwargs.get('device', 'cuda')
-        self.dl_obj = dl_obj
-        self.model_obj = model_obj
+    def __init__(self, cfg):
+        self.epochs = cfg.epochs
+        self.lr = cfg.lr
+        self.device = cfg.device
+        self.verbosity = cfg.verbosity
 
-    def fine_tune(self):
-        train_dl = self.dl_obj.train_dl
-
+    def fine_tune(self, model, dataloader):
         model = self.model_obj.model
         model.train()
         model.to(self.device)
@@ -21,7 +18,7 @@ class FineTuningClass:
         for epoch in self.epochs:
             total_loss = 0
 
-            for x, y in train_dl:
+            for x, y in dataloader:
                 x.to(self.device)
                 y.to(self.device)
 
@@ -31,5 +28,8 @@ class FineTuningClass:
                 loss.backward()
                 opt.step()
             
-            if epoch % 10 == 0 and epoch > 0:
+            if epoch % self.verbosity == 0 and epoch > 0:
                 print(f'Total loss for epoch {epoch} is : {total_loss}')
+    
+    def __call__(self, model, dataloader):
+        self.fine_tune(model, dataloader)
