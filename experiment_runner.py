@@ -1,7 +1,7 @@
-from .DataLoading import data_loader_class
-from .ModelLoading import model_loader_class
-from .DataPoisons import data_poison_class
-from .FineTuning import fine_tuning_class
+from .DataLoading.factory import data_loading_factory
+from .ModelLoading.factory import model_loading_factory
+from .DataPoisons.factory import data_poison_factory
+from .FineTuning.factory import fine_tuning_factory
 
 class ExperimentRunner:
     def __init__(self, cfg):
@@ -11,10 +11,10 @@ class ExperimentRunner:
         self.run()
 
     def run(self):
-        dataset = data_loader_class(self.cfg.dataset)
+        dataset = data_loading_factory(self.cfg.dataset)
 
-        model = model_loader_class(self.cfg.model)
+        model = model_loading_factory(self.cfg.model)
 
-        poison = data_poison_class(self.cfg.poison)
+        poison = data_poison_factory(self.cfg.poison)
 
-        finetuner = fine_tuning_class(self.cfg.training)
+        finetuner = fine_tuning_factory(self.cfg.training)
