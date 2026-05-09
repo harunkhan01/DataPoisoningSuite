@@ -16,3 +16,18 @@ def random_crop(size, padding=None, pad_if_needed=False, fill=0, padding_mode='c
 def random_horizontal_flip(p=0.5):
 
     return T.RandomHorizontalFlip(p)
+
+@register_transform('RandomVerticalFlip')
+def random_vertical_flip(p=0.5):
+
+    return T.RandomVerticalFlip(p)
+
+@register_transform('Normalize')
+def normalize(mean, std, inplace=False):
+
+    return T.Normalize(mean, std, inplace)
+
+@register_transform('ToTensor')
+def to_tensor():
+
+    return T.ToTensor()
