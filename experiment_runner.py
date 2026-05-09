@@ -13,7 +13,7 @@ class ExperimentRunner:
     def run(self):
         dataset = data_loading_factory(self.cfg.dataset)
 
-        model = model_loading_factory(self.cfg.model)
+        model, model_transforms = model_loading_factory(self.cfg.model)
 
         poison = data_poison_factory(self.cfg.poison)
 
