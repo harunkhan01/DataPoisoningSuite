@@ -13,8 +13,18 @@ class ExperimentRunner:
     def run(self):
         dataset = data_loading_factory(self.cfg.dataset)
 
+        print(f'Constructed dataset...')
+
         model, model_transforms = model_loading_factory(self.cfg.model)
+
+        print(f'Constructed model and model transform...')
 
         poison = data_poison_factory(self.cfg.poison)
 
+        print(f'Constructed poison...')
+
         finetuner = fine_tuning_factory(self.cfg.training)
+
+        print(f'Finished finetuning...')
+
+        
