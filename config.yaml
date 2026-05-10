@@ -1,3 +1,5 @@
+device : 'cuda'
+
 dataset:
   name : "cifar10"
   batch_size : 64

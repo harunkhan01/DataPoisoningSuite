@@ -1,5 +1,3 @@
-import copy
-
 from ..base import GenericPoison
 from ..register import register_poison
 
@@ -15,13 +13,15 @@ class Badnets(GenericPoison):
             self.apply_fixed(x)
 
     def apply_random(self, x):
-        pass
+        p_x = x.clone()
 
     def apply_fixed(self, x):
-        p_x = copy.deepcopy(x)
+        p_x = x.clone()
 
-        p_x[:, ] = 
+        c, h, w = self.trigger.shape
+
+        p_x[:c, self.x_loc : self.x_loc + h, self.y_loc : self.y_loc + w] = self.trigger
 
     def build(self):
-        # trigger will depend on trigger size
-        self.trigger = 
+        # badnets requires no building
+        pass

@@ -5,14 +5,31 @@ Generic Poison implements two special methods
         poison when called
 """
 import abc
+import numpy as np
 
 class GenericPoison(abc.ABC):
     def __init__(self, cfg):
         self.tgt_lbl = cfg.target_label
         self.poison_ratio = cfg.poison_ratio
-        self.trigger_size = cfg.trigger_size
-        self.random_placement = True if cfg.random_placement == 1 else False
-        self.poison_loc = (cfg.x_loc, cfg.y_loc) if not self.random_placement else None
+        self.process_trigger_cfg(cfg)
+
+    def process_trigger_cfg(self, cfg):
+        cfg_trigger = cfg.trigger
+
+        self.random_placement = cfg_trigger.placement.random
+
+        if self.random_placement:
+            self.location = None
+        else:
+            self.x = cfg_trigger.placement.x_loc
+            self.y = cfg_trigger.placement.y_loc
+
+        self.trigger = (
+            np.array(cfg_trigger.pattern, dtype=np.uint8)
+            if "pattern" in cfg_trigger
+            else None
+        )
+        self.trigger = np.transpose(self.trigger, (2, 0, 1))
 
     @abstractmethod
     def apply(self):

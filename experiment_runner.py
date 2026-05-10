@@ -11,6 +11,8 @@ class ExperimentRunner:
         self.run()
 
     def run(self):
+        device = self.cfg.device
+
         dataset = data_loading_factory(self.cfg.dataset)
 
         print(f'Constructed dataset...')
