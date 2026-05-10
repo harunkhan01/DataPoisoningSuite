@@ -10,11 +10,16 @@ class GenericPoison(abc.ABC):
     def __init__(self, cfg):
         self.tgt_lbl = cfg.target_label
         self.poison_ratio = cfg.poison_ratio
+        self.trigger_size = cfg.trigger_size
+        self.random_placement = True if cfg.random_placement == 1 else False
+        self.poison_loc = (cfg.x_loc, cfg.y_loc) if not self.random_placement else None
 
     @abstractmethod
     def apply(self):
+        # apply the trigger pattern to a sample
         pass
 
     @abstractmethod
     def build(self):
+        # construct the trigger pattern
         pass

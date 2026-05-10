@@ -16,3 +16,14 @@ poison:
   name : "badnets"
   poison_ratio : 0.10
   target_label : 7
+
+  trigger : 
+
+    placement : 
+      random : true
+      x_loc : 0
+      y_loc : 0
+
+    pattern : 
+      - [[255,0,0], [255,0,0]]
+      - [[255,0,0], [0,0,0]]
