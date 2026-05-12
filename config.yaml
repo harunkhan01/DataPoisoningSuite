@@ -2,7 +2,6 @@ device : 'cuda'
 
 dataset:
   name : "cifar10"
-  batch_size : 64
 
 model: 
   name : "mobilenet_v3_small"
@@ -11,8 +10,8 @@ model:
 training:
   epochs : 10
   lr : 1e-5
-  device : 'cuda'
   verbosity : 10
+  batch_size : 64
 
 poison:
   name : "badnets"

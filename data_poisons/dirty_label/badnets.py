@@ -23,5 +23,5 @@ class Badnets(GenericPoison):
         p_x[:c, self.x_loc : self.x_loc + h, self.y_loc : self.y_loc + w] = self.trigger
 
     def build(self):
-        # badnets requires no building
+        # no building required for badnets
         pass

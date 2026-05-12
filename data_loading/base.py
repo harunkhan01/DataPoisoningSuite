@@ -6,7 +6,6 @@ import transforms
 class GenericDataset:
     def __init__(self, cfg):
         self.cfg = cfg
-        self.batch_size = cfg.batch_size
         self.transform = self.build_transform()
         self.build()
     

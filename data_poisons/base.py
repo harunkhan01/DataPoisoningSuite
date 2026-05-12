@@ -31,12 +31,12 @@ class GenericPoison(abc.ABC):
         )
         self.trigger = np.transpose(self.trigger, (2, 0, 1))
 
-    @abstractmethod
+    @abc.abstractmethod
     def apply(self):
         # apply the trigger pattern to a sample
         pass
 
-    @abstractmethod
+    @abc.abstractmethod
     def build(self):
         # construct the trigger pattern
         pass
