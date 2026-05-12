@@ -1,6 +1,6 @@
 from .register import POISON_REGISTRY
-import clean_label
-import dirty_label
+from . import clean_label
+from . import dirty_label
 
 def data_poison_factory(cfg):
 

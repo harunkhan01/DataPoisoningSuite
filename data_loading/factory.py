@@ -1,5 +1,5 @@
 from .registry import DATASET_REGISTRY
-import datasets
+from . import datasets
 
 def data_loading_factory(cfg):
 

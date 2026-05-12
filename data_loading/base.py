@@ -1,7 +1,7 @@
 from torchvision.transforms import Compose
 
 from .registry import TRANSFORM_REGISTRY
-import transforms
+from . import transforms
 
 class GenericDataset:
     def __init__(self, cfg):

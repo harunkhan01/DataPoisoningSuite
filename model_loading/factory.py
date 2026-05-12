@@ -1,6 +1,5 @@
 from .registry import MODEL_REGISTRY
-import specific_models
-
+from . import specific_models
 
 def model_loading_factory(cfg):
 

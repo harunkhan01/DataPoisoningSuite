@@ -1,6 +1,6 @@
 from .finetuning.factory import fine_tuning_factory
 from .data_poisons.factory import data_poison_factory
-from .evaluator.evaluate_class import EvaluatePoisons
+from .evaluator.evaluator_class import EvaluatePoisons
 from .data_loading.factory import data_loading_factory
 from .data_loading.poison_dataset import PoisonedDataset
 from .model_loading.factory import model_loading_factory

@@ -1,4 +1,4 @@
-import torch.datasets as datasets
+from torchvision import datasets
 
 from ..registry import register_dataset
 from ..base import GenericDataset
