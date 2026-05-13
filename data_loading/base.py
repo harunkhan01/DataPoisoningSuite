@@ -10,9 +10,10 @@ class GenericDataset:
         self.build()
     
     def build_transform(self):
-        transform_dict = self.cfg.transforms
+        transform_dict = self.cfg['transforms']
 
-        op_list = []
+        to_tensor = TRANSFORM_REGISTRY['ToTensor']
+        op_list = [to_tensor()]
 
         for name, args in transform_dict.items():
             fn = TRANSFORM_REGISTRY[name]

@@ -10,7 +10,7 @@ class MobilenetV3Small(GenericModel):
         super().__init__(cfg)
 
     def build(self):
-        self.model = self.mobilenet_v3_small()
+        self.mobilenet_v3_small()
 
     def mobilenet_v3_small(self):
         self.weights = models.MobileNet_V3_Small_Weights.DEFAULT

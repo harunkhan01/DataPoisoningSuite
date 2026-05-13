@@ -1,3 +1,5 @@
+import torch
+
 from ..base import GenericPoison
 from ..register import register_poison
 
@@ -8,9 +10,9 @@ class Badnets(GenericPoison):
         
     def apply(self, x):
         if self.random_placement:
-            self.apply_random(x)
-        else:
-            self.apply_fixed(x)
+            return self.apply_random(x)
+        
+        return self.apply_fixed(x)
 
     def apply_random(self, x):
         p_x = x.clone()
@@ -21,6 +23,8 @@ class Badnets(GenericPoison):
         c, h, w = self.trigger.shape
 
         p_x[:c, self.x_loc : self.x_loc + h, self.y_loc : self.y_loc + w] = self.trigger
+
+        return p_x
 
     def build(self):
         # no building required for badnets

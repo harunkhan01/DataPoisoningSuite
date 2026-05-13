@@ -5,34 +5,37 @@ Generic Poison implements two special methods
         poison when called
 """
 import abc
+import torch
 import numpy as np
 
 class GenericPoison(abc.ABC):
     def __init__(self, cfg):
-        self.tgt_lbl = cfg.target_label
-        self.poison_ratio = cfg.poison_ratio
+        super().__init__()
+        self.tgt_lbl = cfg['target_label']
+        self.poison_ratio = cfg['poison_ratio']
         self.process_trigger_cfg(cfg)
 
     def process_trigger_cfg(self, cfg):
-        cfg_trigger = cfg.trigger
+        cfg_trigger = cfg['trigger']
 
-        self.random_placement = cfg_trigger.placement.random
+        self.random_placement = cfg_trigger['placement']['random']
 
         if self.random_placement:
             self.location = None
         else:
-            self.x = cfg_trigger.placement.x_loc
-            self.y = cfg_trigger.placement.y_loc
+            self.x_loc = cfg_trigger['placement']['x_loc']
+            self.y_loc = cfg_trigger['placement']['y_loc']
 
         self.trigger = (
-            np.array(cfg_trigger.pattern, dtype=np.uint8)
+            np.array(cfg_trigger['pattern'], dtype=np.uint8)
             if "pattern" in cfg_trigger
             else None
         )
         self.trigger = np.transpose(self.trigger, (2, 0, 1))
+        self.trigger = torch.from_numpy(self.trigger)
 
     @abc.abstractmethod
-    def apply(self):
+    def apply(self, x):
         # apply the trigger pattern to a sample
         pass
 

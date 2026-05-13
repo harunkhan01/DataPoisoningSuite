@@ -6,10 +6,10 @@ class PoisonedDataset(Dataset):
     def __init__(self, dataset, poison_obj, cfg):
         self.dataset = dataset
         self.poison_obj = poison_obj
-        self.target_label = cfg.target_label
+        self.target_label = cfg['target_label']
 
         n = len(self.dataset)
-        n_poison = int(n * cfg.poison_ratio)
+        n_poison = int(n * cfg['poison_ratio'])
         self.poisoned_indices = set(
             random.sample(range(n), n_poison)
         )

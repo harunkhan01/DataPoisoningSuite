@@ -2,14 +2,17 @@ device : 'cuda'
 
 dataset:
   name : "cifar10"
+  transforms : 
+    RandomHorizontalFlip : 
+      p : 0.5
 
 model: 
   name : "mobilenet_v3_small"
   output_classes : 10
 
 training:
-  epochs : 10
-  lr : 1e-5
+  epochs : 20
+  lr : 0.01
   verbosity : 10
   batch_size : 64
 
@@ -21,7 +24,7 @@ poison:
   trigger : 
 
     placement : 
-      random : true
+      random : false
       x_loc : 0
       y_loc : 0
 

@@ -3,10 +3,10 @@ from . import specific_models
 
 def model_loading_factory(cfg):
 
-    model_name = cfg.name
+    model_name = cfg['name']
 
     model_class = MODEL_REGISTRY[model_name]
 
-    model = model_class()
+    model = model_class(cfg)
 
-    return model
+    return model.model, model.weights

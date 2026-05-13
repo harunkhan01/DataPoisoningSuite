@@ -5,7 +5,7 @@ def fit(model, train_dataloader, val_dataloader, lr, epochs, device, verbosity):
     
     model.train()
     model.to(device)
-    loss_fn = torch.nn.CrossEntropyLoss
+    loss_fn = torch.nn.CrossEntropyLoss()
     opt = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9)
 
     for epoch in range(epochs):
@@ -26,11 +26,11 @@ def fit(model, train_dataloader, val_dataloader, lr, epochs, device, verbosity):
             print(f'Loss for epoch {epoch} is: {total_loss}')
 
 def fine_tuning_factory(model, train, device, cfg):
-    lr = cfg.lr
-    epochs = cfg.epochs
-    verbosity = cfg.device
-    batch_size = cfg.batch_size
+    lr = cfg['lr']
+    epochs = cfg['epochs']
+    verbosity = cfg['verbosity']
+    batch_size = cfg['batch_size']
 
-    train_dataloader = DataLoader(train, batch_size=batch_size, shuffle=True)
+    train_dataloader = DataLoader(train, batch_size=batch_size, shuffle=True, num_workers=8)
 
     fit(model, train_dataloader, None, lr, epochs, device, verbosity)
