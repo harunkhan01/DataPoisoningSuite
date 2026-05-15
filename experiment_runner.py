@@ -33,7 +33,7 @@ class ExperimentRunner:
 
         # stage 4 -- construct poisoned dataset
         poison_train = PoisonedDataset(dataset.train, poison_obj, self.cfg['poison'])
-        poison_test  = PoisonedDataset(dataset.test, poison_obj, self.cfg['poison'])
+        poison_test  = PoisonedDataset(dataset.test, poison_obj, self.cfg['poison'], True)
 
         # stage 5 -- finetune model with poisoned dataset
         fine_tuning_factory(model, poison_train, device, self.cfg['training'])
