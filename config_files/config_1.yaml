@@ -10,11 +10,19 @@ model:
   name : "mobilenet_v3_small"
   output_classes : 10
 
-training:
-  epochs : 20
-  lr : 0.01
-  verbosity : 10
-  batch_size : 64
+finetuning:
+  training:
+    epochs : 20
+    lr: 0.01
+    verbosity: 10
+    batch_size: 64
+
+  backbone:
+    mode: "last_n"
+    value: 4
+  
+  head:
+    mode: "none"
 
 poison:
   name : "badnets"

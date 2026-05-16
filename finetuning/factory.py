@@ -26,10 +26,10 @@ def fit(model, train_dataloader, val_dataloader, lr, epochs, device, verbosity):
             print(f'Loss for epoch {epoch} is: {total_loss}')
 
 def fine_tuning_factory(model, train, device, cfg):
-    lr = cfg['lr']
-    epochs = cfg['epochs']
-    verbosity = cfg['verbosity']
-    batch_size = cfg['batch_size']
+    lr = cfg['training']['lr']
+    epochs = cfg['training']['epochs']
+    verbosity = cfg['training']['verbosity']
+    batch_size = cfg['training']['batch_size']
 
     train_dataloader = DataLoader(train, batch_size=batch_size, shuffle=True, num_workers=8)
 
