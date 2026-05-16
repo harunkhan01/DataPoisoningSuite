@@ -13,7 +13,7 @@ model:
 training:
   epochs : 20
   lr : 0.01
-  verbosity : 10
+  verbosity : 5
   batch_size : 64
 
 poison:
@@ -24,7 +24,7 @@ poison:
   trigger : 
 
     placement : 
-      random : false
+      random : true
       x_loc : 0
       y_loc : 0
 
