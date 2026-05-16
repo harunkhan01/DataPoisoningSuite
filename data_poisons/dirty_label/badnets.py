@@ -1,4 +1,5 @@
 import torch
+import random
 
 from ..base import GenericPoison
 from ..register import register_poison
@@ -16,6 +17,17 @@ class Badnets(GenericPoison):
 
     def apply_random(self, x):
         p_x = x.clone()
+
+        c, h, w = self.trigger.shape
+
+        ic, ih, iw = p_x.shape
+
+        x_loc = random.randint(0, ih - h)
+        y_loc = random.randint(0, iw - w)
+
+        p_x[:c, x_loc : x_loc + h, y_loc : y_loc + w] = self.trigger
+
+        return p_x
 
     def apply_fixed(self, x):
         p_x = x.clone()
