@@ -22,7 +22,7 @@ finetuning:
     value: 4
   
   head:
-    mode: "none"
+    value: 0
 
 poison:
   name : "badnets"
