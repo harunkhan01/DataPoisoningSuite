@@ -1,3 +1,4 @@
+import abc
 import torch
 
 class GenericModel(torch.nn.Module):
@@ -5,3 +6,7 @@ class GenericModel(torch.nn.Module):
         super().__init__()
         self.output_classes = cfg['output_classes']
         self.build()
+
+    @abc.abstractmethod
+    def build(self):
+        pass

@@ -14,5 +14,5 @@ def main(config_file):
 
     cfg = load_config(config_file)
 
-    expr = ExperimentRunner(cfg)
+    expr = ExperimentRunner(cfg, config_file)
     expr()

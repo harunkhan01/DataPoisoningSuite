@@ -1,3 +1,5 @@
+import os
+
 from .finetuning.factory import fine_tuning_factory
 from .data_poisons.factory import data_poison_factory
 from .evaluator.evaluator_class import EvaluatePoisons
@@ -7,8 +9,9 @@ from .model_loading.factory import model_loading_factory
 
 
 class ExperimentRunner:
-    def __init__(self, cfg):
+    def __init__(self, cfg, file_name):
         self.cfg = cfg
+        self.file_name = file_name # used to save the run
 
     def __call__(self):
         self.run()
@@ -47,6 +50,9 @@ class ExperimentRunner:
         print(f'Evaluation complete.')
 
         # stage 7 -- save experiment results (will implement later)
+        save_path = os.path.join('./outputs', self.file_name)
 
-        print(f'All done.')       
+        with open(save_path, 'a') as f:
+            f.write(f'Benign Accuracy: {benign_acc}, Poison Accuracy: {poison_acc}')
 
+        print(f'All done. Closing...')
